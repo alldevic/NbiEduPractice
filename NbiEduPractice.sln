@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DvornikovSolver", "DvornikovSolver\DvornikovSolver.csproj", "{FBAA9C00-7055-43F0-B95D-1E97C2C88956}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBAA9C00-7055-43F0-B95D-1E97C2C88956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAA9C00-7055-43F0-B95D-1E97C2C88956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAA9C00-7055-43F0-B95D-1E97C2C88956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAA9C00-7055-43F0-B95D-1E97C2C88956}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
