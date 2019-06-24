@@ -12,7 +12,7 @@ namespace ConsoleView
             try
             {
                 Utils.SetValues(out mobilityW, out countM, out countN, out complexityTau);
-                DvornikovTask.DvornikovTask.CheckArgs(mobilityW, countM, countN, complexityTau);
+                DvornikovSystem.CheckArgs(mobilityW, countM, countN, complexityTau);
             }
             catch (Exception)
             {
@@ -20,12 +20,12 @@ namespace ConsoleView
                 return;
             }
 
-            var system = new DvornikovTask.DvornikovTask(mobilityW, countM, countN, complexityTau);
+            var system = new DvornikovTask.DvornikovSystem(mobilityW, countM, countN, complexityTau);
             var solution = system.Solve();
 
 
             Console.WriteLine(solution.PairsCount);
-            foreach (var sln in DvornikovSolution.Solutions)
+            foreach (var sln in solution.Solutions)
             {
                 Utils.PrintSolution(sln);
             }

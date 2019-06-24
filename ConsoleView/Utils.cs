@@ -10,7 +10,7 @@ namespace ConsoleView
             try
             {
                 GetUintValueFromConsole("Введите подвижность цепи W:", "W", out mobilityW);
-                GetUintValueFromConsole("Введите число общих связей, наложенных на систему M: :", "M", out countM);
+                GetUintValueFromConsole("Введите число общих связей, наложенных на систему M:", "M", out countM);
                 GetUintValueFromConsole("Введите общее исло подвижных звеньев N:", "N", out countN);
                 GetUintValueFromConsole("Введите максимальная допустимая сложность звена t:", "t", out complexityTau);
             }
@@ -37,7 +37,12 @@ namespace ConsoleView
 
         public static void PrintSolution(SystemSolution sln)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < sln.DimensionsCount; i++)
+            {
+                Console.Write($"n{i}={sln.Values[i]}, ");
+            }
+
+            Console.WriteLine();
         }
     }
 }
