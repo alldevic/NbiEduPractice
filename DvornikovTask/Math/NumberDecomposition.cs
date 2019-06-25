@@ -16,47 +16,45 @@ namespace DvornikovTask.Math
 
         public IEnumerator<List<uint>> GetEnumerator()
         {
-            var decomposition = new uint[TermsCount];
-            decomposition[0] = Number;
-            yield return decomposition.ToList();
-            while (decomposition[TermsCount - 1] != Number)
+            var tmp = new uint[TermsCount + 1];
+            tmp[TermsCount] = Number + TermsCount;
+
+            for (uint i = 1; i < TermsCount; i++)
             {
-                yield return NextDecomposition(decomposition);
+                tmp[i] = i;
             }
+
+            do
+            {
+                var res = new uint[TermsCount];
+                for (var i = 1; i <= TermsCount; i++)
+                {
+                    res[i - 1] = tmp[i] - tmp[i - 1] - 1;
+                }
+
+                yield return res.ToList();
+            } while (NextDecomposition(tmp));
         }
 
-        // TODO: выводит далеко не все разложения
-        private List<uint> NextDecomposition(uint[] decomposition)
+        private bool NextDecomposition(uint[] prev)
         {
-            var max = decomposition.ToList().IndexOf(decomposition.First(x => x != 0));
-            for (int i = max; i < decomposition.Length; i++)
+            for (var i = TermsCount - 1; i > 0; i--)
             {
-                if (decomposition[i] != 0 && decomposition[i] > decomposition[max])
+                if (prev[i] >= Number + i)
                 {
-                    max = i;
-                }
-            }
-
-            decomposition[max]--;
-
-
-            if (max + 1 > decomposition.Length - 1)
-            {
-                var tmp = decomposition.Cast<int>().Sum() + 1;
-                for (int i = 0; i < decomposition.Length; i++)
-                {
-                    decomposition[i] = 0;
+                    continue;
                 }
 
-                decomposition[max] = (uint) tmp;
-            }
-            else
-            {
-                decomposition[max + 1]++;
+                prev[i] = prev[i] + 1;
+                for (var j = i + 1; j < TermsCount; j++)
+                {
+                    prev[j] = prev[j - 1] + 1;
+                }
+
+                return true;
             }
 
-
-            return decomposition.ToList();
+            return false;
         }
     }
 }

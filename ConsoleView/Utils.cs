@@ -28,7 +28,7 @@ namespace ConsoleView
             {
                 mobilityW = uint.Parse(Console.ReadLine());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine($"Введено некоорректное значение {label}");
                 throw;

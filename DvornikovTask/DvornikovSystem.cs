@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using DvornikovTask.Math;
 
 namespace DvornikovTask
@@ -45,14 +44,14 @@ namespace DvornikovTask
         public DvornikovSolution Solve()
         {
             var result = new DvornikovSolution();
-            var countNdecompositions = new NumberDecomposition(CountN-1, ComplexityTau-1);
+            var countNdecompositions = new NumberDecomposition(CountN-1, ComplexityTau - 1);
 
             var rangeTau = new List<uint>();
-            var tmpTAu = ComplexityTau;
-            while (tmpTAu > 0)
+            var tmpTau = ComplexityTau;
+            while (tmpTau > 0)
             {
-                rangeTau.Add(tmpTAu);
-                tmpTAu--;
+                rangeTau.Add(tmpTau);
+                tmpTau--;
             }
 
             foreach (var decomposition in countNdecompositions)

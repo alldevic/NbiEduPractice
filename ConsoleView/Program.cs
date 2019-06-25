@@ -20,7 +20,7 @@ namespace ConsoleView
                 return;
             }
 
-            var system = new DvornikovTask.DvornikovSystem(mobilityW, countM, countN, complexityTau);
+            var system = new DvornikovSystem(mobilityW, countM, countN, complexityTau);
             var solution = system.Solve();
 
 
