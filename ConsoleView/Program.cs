@@ -22,12 +22,29 @@ namespace ConsoleView
 
             var system = new DvornikovSystem(mobilityW, countM, countN, complexityTau);
             var solution = system.Solve();
+            Console.WriteLine();
 
+            PrintSolution(solution);
+        }
 
-            Console.WriteLine(solution.PairsCount);
+        private static void PrintSolution(DvornikovSolution solution)
+        {
+            Console.Write("Система c параметрами ");
+            Console.Write($"n={solution.SystemCountN}, m={solution.SystemCountM}, ");
+            Console.Write($"w={solution.SystemMobilityW}, t={solution.SystemComplexityTau} ");
+            Console.WriteLine($"имеет {solution.SolutionsCount} решений");
+            Console.WriteLine();
+
             foreach (var sln in solution.Solutions)
             {
-                Utils.PrintSolution(sln);
+                Utils.PrintSolution(sln.Key, "n", ", ");
+                foreach (var value in sln.Value)
+                {
+                    Console.Write("   ");
+                    Utils.PrintSolution(value, "k", ", ");
+                }
+
+                Console.WriteLine();
             }
         }
     }

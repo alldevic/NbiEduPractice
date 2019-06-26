@@ -19,9 +19,9 @@ namespace DvornikovTask.Math
             var tmp = new uint[TermsCount + 1];
             tmp[TermsCount] = Number + TermsCount;
 
-            for (uint i = 1; i < TermsCount; i++)
+            for (var i = 1; i < TermsCount; i++)
             {
-                tmp[i] = i;
+                tmp[i] = (uint) i;
             }
 
             do
@@ -38,7 +38,7 @@ namespace DvornikovTask.Math
 
         private bool NextDecomposition(uint[] prev)
         {
-            for (var i = TermsCount - 1; i > 0; i--)
+            for (var i = (int)TermsCount - 1; i > 0; i--)
             {
                 if (prev[i] >= Number + i)
                 {

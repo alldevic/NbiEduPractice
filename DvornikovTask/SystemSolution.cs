@@ -1,3 +1,5 @@
+using System.Dynamic;
+
 namespace DvornikovTask
 {
     public class SystemSolution
@@ -5,10 +7,14 @@ namespace DvornikovTask
         public uint DimensionsCount { get; }
         public uint[] Values { get; }
 
-        public SystemSolution(uint dimension, uint[] values)
+        public uint[] Indexes { get; }
+
+        public SystemSolution(uint dimension, uint[] values, uint[] indexes)
         {
             DimensionsCount = dimension;
             Values = values;
+            Indexes = indexes;
         }
+        
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using DvornikovTask;
 
 namespace ConsoleView
@@ -26,7 +27,7 @@ namespace ConsoleView
             Console.WriteLine(description);
             try
             {
-                mobilityW = uint.Parse(Console.ReadLine());
+                mobilityW = uint.Parse(Console.ReadLine() ?? throw new ArgumentNullException());
             }
             catch (Exception)
             {
@@ -35,14 +36,19 @@ namespace ConsoleView
             }
         }
 
-        public static void PrintSolution(SystemSolution sln)
+        public static void PrintSolution(SystemSolution sln, string prefix, string separator)
         {
-            for (int i = 0; i < sln.DimensionsCount; i++)
+            var sb = new StringBuilder();
+            for (var i = 0; i < sln.DimensionsCount; i++)
             {
-                Console.Write($"n{i}={sln.Values[i]}, ");
+                if (sb.Length > 0)
+                {
+                    sb.Append(separator);
+                }
+                sb.Append($"{prefix}[{sln.Indexes[i]}]={sln.Values[i]}");
             }
 
-            Console.WriteLine();
+            Console.WriteLine(sb.ToString());
         }
     }
 }

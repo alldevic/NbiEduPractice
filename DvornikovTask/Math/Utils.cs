@@ -13,7 +13,7 @@ namespace DvornikovTask.Math
             }
 
             uint result = 0;
-            for (int i = 0; i < firstList.Count; i++)
+            for (var i = 0; i < firstList.Count; i++)
             {
                 result += firstList[i] * secondList[i];
             }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DvornikovTask.Math;
 
 namespace DvornikovTask
@@ -26,8 +27,6 @@ namespace DvornikovTask
 
         public static void CheckArgs(uint mobilityW, uint countM, uint countN, uint complexityTau)
         {
-            // w-?
-
             if (countM > 4)
             {
                 throw new ArgumentOutOfRangeException();
@@ -38,33 +37,44 @@ namespace DvornikovTask
                 throw new ArgumentOutOfRangeException();
             }
 
-            // tau - ?
+            if (complexityTau == 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         public DvornikovSolution Solve()
         {
-            var result = new DvornikovSolution();
-            var countNdecompositions = new NumberDecomposition(CountN-1, ComplexityTau - 1);
+            var result = new DvornikovSolution(this);
+            var decompositions = new NumberDecomposition(CountN - 1, ComplexityTau - 1);
+            var rangeTau = Enumerable.Range(1, (int) ComplexityTau).Reverse().Select(i => (uint) i).ToList();
 
-            var rangeTau = new List<uint>();
-            var tmpTau = ComplexityTau;
-            while (tmpTau > 0)
-            {
-                rangeTau.Add(tmpTau);
-                tmpTau--;
-            }
-
-            foreach (var decomposition in countNdecompositions)
+            foreach (var decomposition in decompositions)
             {
                 decomposition.Insert(0, 1);
                 var tmp = Utils.MultiSum(decomposition, rangeTau);
                 var tmpDecompositions = new NumberDecomposition(tmp, 5 - CountM);
+                var resultDecomposition = decomposition.Skip(1).Reverse().ToArray();
+
+                var key = new SystemSolution((uint) resultDecomposition.Length, resultDecomposition,
+                    Enumerable.Range(1, (int) ComplexityTau - 1).Select(i => (uint) i).ToArray());
+                
                 foreach (var tmpDecomposition in tmpDecompositions)
                 {
-                    if (CheckSum(tmpDecomposition))
+                    if (!CheckSum(tmpDecomposition))
                     {
-                        result.Solutions.Add(new SystemSolution((uint) decomposition.Count, decomposition.ToArray()));
+                        continue;
                     }
+
+                    var value = new SystemSolution((uint) tmpDecomposition.Count, tmpDecomposition.ToArray(),
+                        Enumerable.Range((int)CountM + 1, (int) (5 - CountM)).Reverse().Select(i => (uint) i).ToArray());
+
+                    if (!result.Solutions.ContainsKey(key))
+                    {
+                        result.Solutions.Add(key, new List<SystemSolution>());
+                    }
+
+                    result.Solutions[key].Add(value);
                 }
             }
 

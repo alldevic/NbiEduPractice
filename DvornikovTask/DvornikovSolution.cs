@@ -1,15 +1,26 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DvornikovTask
 {
     public class DvornikovSolution
     {
-        public int PairsCount { get; private set; }
-        public List<SystemSolution> Solutions { get; set; }
+        private readonly DvornikovSystem _system;
 
-        public DvornikovSolution()
+        public uint SystemCountN => _system.CountN;
+        public uint SystemCountM => _system.CountM;
+        public uint SystemComplexityTau => _system.ComplexityTau;
+        public uint SystemMobilityW => _system.MobilityW;
+
+
+        public int SolutionsCount => Solutions.Values.Sum(list => list.Count);
+
+        public Dictionary<SystemSolution, List<SystemSolution>> Solutions { get; }
+
+        public DvornikovSolution(DvornikovSystem system)
         {
-            Solutions = new List<SystemSolution>();
+            _system = system;
+            Solutions = new Dictionary<SystemSolution, List<SystemSolution>>();
         }
     }
 }
